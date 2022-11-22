@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello NewsController!{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="{{ asset('style.css') }}"/>
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .alex {margin-top:80px; border:0.4px solid lightgrey; padding:10px}
+	.nav-icon li{margin-left:10px}
+</style>
+
+<div class="container">
+		<header>
+			<h1><a href="index.html">APP CAKE NEWS</a><span id="version">v1</span></h1>
+			<nav>
+				<ul>
+					<li><a href="index.html" class="current">Home</a></li>
+					<li><a href="#">News</a></li>
+					<li><a href="#">Gallery</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+			</nav>
+		</header>
+    <h1>News Report ✅</h1>
+    <div class="row alex">
+
+    {% for dt in data %}
+    <div id="secwrapper" class="col-lg-3">
+			<section>
+				<article id="featured">
+					<a href="#"><img src="{{ asset('images/1.jpg') }}" alt=""/></a>
+					<img src="{{ asset('images/featured.png') }}" alt="" id="featuredico"/>
+					<h1>{{ dt.title }}</h1>
+					<p>{{ dt.short_description }}</p>
+					{% if is_granted('ROLE_ADMIN') %}
+					<a  class=" btn btn-danger" onclick="deleteNews('{{dt.id}}')">Delete News</a>
+					{% endif %}
+					
+				</article>
+            <section>
+    </div>
+     {% endfor %}
+    
+	<div style="margin-top:30px" class="nav-icon">
+		  <ul class="pagination justify-content-center">
+			<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="prev()"><</a></li>&nbsp
+			<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="next({{pages}})">></a></li>&nbsp
+			<li class="page-item">
+			<select class="form-control" name="goto" onchange="gotoNext(this.value)" style="padding-left:15px; padding-right:15px">
+			<option>..</option>
+			{% for i in 1 .. pages %}			 
+			<option value="{{ i }}" id="{{i}}">{{ i }}</option>
+			{% endfor %}
+			
+			<select>
+			</li>
+		  </ul>
+	</div>
+	</div>
+
+    
+</div>
+
+
+<script src="{{ asset('appcake.js')}}"></script>
+
+{% endblock %}
