@@ -22,6 +22,9 @@ class NewsController extends AbstractController
         $this->messageService = $messageService;
     }
 
+     /**
+     * @Route("/news", name="app_news")
+     */
     
     #[Route('/news', name: 'app_news')]
     public function index(Request $request, ProcessNews $pn ): Response
@@ -46,8 +49,10 @@ class NewsController extends AbstractController
         ]);
     }
     //07032215149
-
-    #[Route('/news_save', name: 'app_save_news')]
+     /**
+     * @Route("/news_save", name="app_save_news")
+     */
+  
     public function save(ManagerRegistry $doctrine): Response{
         $entityManager = $doctrine->getManager();
         $repository = $doctrine->getRepository(Articles::class);
