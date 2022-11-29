@@ -24,16 +24,17 @@
 				</ul>
 			</nav>
 		</header>
+<div style="top:70px; position:relative">
     <h1>News Report ✅</h1>
     <div class="row alex">
 
     {% for dt in data %}
     <div id="secwrapper" class="col-lg-3">
 			<section>
-				<article id="featured">
-					<a href="#"><img src="{{ asset('images/1.jpg') }}" alt=""/></a>
+				<article id="featured" style="overflow:auto; height:450px">
+					<a href="#"><img src="{{ dt.picture }}" height="180px" width="250px"alt=""/></a>
 					<img src="{{ asset('images/featured.png') }}" alt="" id="featuredico"/>
-					<h1>{{ dt.title }}</h1>
+					<h2>{{ dt.title }}</h2>
 					<p>{{ dt.short_description }}</p>
 					{% if is_granted('ROLE_ADMIN') %}
 					<a  class=" btn btn-danger" onclick="deleteNews('{{dt.id}}')">Delete News</a>
@@ -63,7 +64,7 @@
 
     
 </div>
-
+</div>
 
 <script src="{{ asset('appcake.js')}}"></script>
 

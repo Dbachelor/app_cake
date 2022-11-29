@@ -8,26 +8,45 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+/**
+ * Users
+ *
+ * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+      /**
+    * @var int
+    *
+    * @ORM\Column(name="id", type="bigint", nullable=false)
+    * @ORM\Id
+    * @ORM\GeneratedValue(strategy="IDENTITY")
+    */
     private ?int $id = null;
 
-    #[ORM\Column(length: 180, unique: true)]
+       /**
+    * @var string
+    *
+    * @ORM\Column(name="email", type="string", length=255, nullable=false)
+    */
     private ?string $email = null;
 
-    #[ORM\Column]
+       /**
+    * @var string
+    *
+    * @ORM\Column(name="roles",  nullable=false)
+    */
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
-    #[ORM\Column]
+        /**
+    * @var string
+    *
+    * @ORM\Column(name="password", type="string", length=255, nullable=false)
+    */
     private ?string $password = null;
 
     public function getId(): ?int
