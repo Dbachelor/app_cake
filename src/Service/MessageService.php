@@ -30,7 +30,7 @@ class MessageService
            
         }
 
-        return json_encode($this->arr);
+        return $this->arr;
     }
 
 

@@ -109,9 +109,10 @@ class NewsController extends AbstractController
     public function createMessages(): JsonResponse
     {
         $message = new MessageService();//('user@example.com', 'Welcome!', 'Registration has been completed.');
-        $this->dispatchMessage(new MessageServiceHandler());
-
-        return new JsonResponse(['status' => 'Sent!']);
+        if ($this->dispatchMessage(new MessageServiceHandler())) {
+            return new JsonResponse(['status' => 'Sent!']);
+        }
+        return new JsonResponse(["stats"=>"failed"]);
     }
 
 
