@@ -76,7 +76,7 @@ class NewsController extends AbstractController
         }
         
 
-        return new Response('Saved news with title '.$product->getTitle());
+        return new Response('Saved news with id '.$product->getId());
     }
 
      /**

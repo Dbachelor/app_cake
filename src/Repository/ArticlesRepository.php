@@ -15,7 +15,10 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Articles|null findOneBy(array $criteria, array $orderBy = null)
  * @method Articles[]    findAll()
  * @method Articles[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * 
  */
+
+
 class ArticlesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)

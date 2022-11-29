@@ -10,25 +10,53 @@ use Doctrine\Persistence\ManagerRegistry;
 use	 Doctrine\ORM\Tools\Pagination\Paginator;
 use	 Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository	;
 
-#[ORM\Entity(repositoryClass: ArticlesRepository::class)]
+// #[ORM\Entity(repositoryClass: ArticlesRepository::class)]
 
-class Articles extends ServiceEntityRepository
+/**
+ * Articles
+ *
+ * @ORM\Table(name="articles")
+ * @ORM\Entity(repositoryClass="App\Repository\ArticlesRepository")
+ */
+
+class Articles
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+      /**
+    * @var int
+    *
+    * @ORM\Column(name="id", type="bigint", nullable=false)
+    * @ORM\Id
+    * @ORM\GeneratedValue(strategy="IDENTITY")
+    */
+
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    /**
+    * @var string
+    *
+    * @ORM\Column(name="title", type="string", length=255, nullable=false)
+    */
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+     /**
+    * @var string
+    *
+    * @ORM\Column(name="short_description", type="text", length=0, nullable=false)
+    */
     private ?string $short_description = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+     /**
+    * @var string
+    *
+    * @ORM\Column(name="picture", type="text", length=15555555, nullable=false)
+    */
     private ?string $picture = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+      /**
+    * @var string
+    *
+    * @ORM\Column(name="date_added", type="datetime", length=255, nullable=false)
+    */
     private ?\DateTimeInterface $date_added = null;
 
     public function getId(): ?int
