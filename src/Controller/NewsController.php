@@ -9,10 +9,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Articles;
-use App\Repository\ArticlesRepository;
+// use App\Repository\ArticlesRepository;
 use App\Service\MessageService;
 use App\Service\ProcessNews;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Process\Process;
 
 class NewsController extends AbstractController
 {
@@ -53,31 +54,29 @@ class NewsController extends AbstractController
      * @Route("/news_save", name="app_save_news")
      */
   
-    public function save(ManagerRegistry $doctrine): Response{
+    public function save(ManagerRegistry $doctrine, $checker, $array): Response{
         $entityManager = $doctrine->getManager();
         $repository = $doctrine->getRepository(Articles::class);
-
-
         // look for a single Product by name
-        $products = $repository->findOneBy(['title' => 'Keyboard']);
+        $products = $repository->findOneBy(['title' => $checker]);
         $product = new Articles();
         if (!$products){
-            $product->setTitle('Keyboard');
-            $product->setShortDescription('1999');
-            $product->setPicture('');
+            $product->setTitle($array['title']);
+            $product->setShortDescription($array['short_description']);
+            $product->setPicture($array['image']);
             $product->setDateAdded(new \DateTime());
             $entityManager->persist($product);
             $entityManager->flush();
         }else{
             print_r($products->getDateAdded());
             $products->setDateAdded(new \DateTime());
-            $products->setPicture('....');
+            //$products->setPicture('....');
            // $entityManager->persist($product);
             $entityManager->flush();
         }
         
 
-        return new Response('Saved news with id '.$product->getId());
+        return new Response('Saved news with title '.$product->getTitle());
     }
 
      /**

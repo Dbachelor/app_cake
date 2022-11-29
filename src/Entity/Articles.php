@@ -11,6 +11,7 @@ use	 Doctrine\ORM\Tools\Pagination\Paginator;
 use	 Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository	;
 
 #[ORM\Entity(repositoryClass: ArticlesRepository::class)]
+
 class Articles extends ServiceEntityRepository
 {
     #[ORM\Id]
